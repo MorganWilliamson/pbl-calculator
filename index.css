@@ -1,0 +1,7 @@
+body {
+    background: darkseagreen;
+}
+
+.calculator__keys {
+    display: grid;
+}
