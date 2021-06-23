@@ -8,10 +8,16 @@ keys.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
         const key = e.target;
         const action = key.dataset.action; // data-action !== number
+        const keyContent = key.textContent;
+        const displayedNum = display.textContent;
 
         // Check/Log Actions
         if (!action) {
-            console.log("Number Key: ", key)
+            if (displayedNum === "0") {
+                display.textContent = keyContent;
+            } else {
+                display.textContent = displayedNum + keyContent;
+            }
         };
 
         if (
@@ -24,7 +30,9 @@ keys.addEventListener("click", (e) => {
         };
 
         if (action === "decimal") {
-            console.log("Decimal Key")
+            if (!displayedNum.includes(".")) {
+                display.textContent = displayedNum + ".";
+            }
         };
 
         if (action === "clear") {
