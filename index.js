@@ -61,7 +61,6 @@ keys.addEventListener("click", (e) => {
                 ) {
                 const calcValue = calculate(firstValue, operator, secondValue);
                 display.textContent = calcValue;
-
                 calculator.dataset.firstValue = calcValue;
             } else {
                 calculator.dataset.firstValue = displayedNum;
@@ -83,12 +82,22 @@ keys.addEventListener("click", (e) => {
             ) {
                 display.textContent = "0."
             }
+
             calculator.dataset.previousKeyType = "decimal";
         }
 
         // Clear Key
         if (action === "clear") {
-            console.log("Clear Key")
+            if (key.textContent === "AC") {
+                calculator.dataset.firstValue = "";
+                calculator.dataset.modValue = "";
+                calculator.dataset.operator = "";
+                calculator.dataset.previousKeyType = "";
+            } else {
+                key.textContent = "AC";
+            }
+
+            display.textContent = "0";
             calculator.dataset.previousKeyType = "clear";
         }
 
