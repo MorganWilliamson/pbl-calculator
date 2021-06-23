@@ -10,38 +10,42 @@ keys.addEventListener("click", (e) => {
         const action = key.dataset.action; // data-action !== number
         const keyContent = key.textContent;
         const displayedNum = display.textContent;
+        const previousKeyType = calculator.dataset.previousKeyType;
 
         // Check/Log Actions
         if (!action) {
-            if (displayedNum === "0") {
+            if (displayedNum === "0" || previousKeyType === "operator") {
                 display.textContent = keyContent;
             } else {
                 display.textContent = displayedNum + keyContent;
             }
-        };
+        }
 
-        if (
-            action === "add" ||
-            action === "subtract" ||
-            action === "divide" ||
-            action === "multiply"
-        ) {
-            console.log("Operator Key: ", key)
-        };
+        if (action === "add" || "subtract" || "divide" || "multiply") {
+            key.classList.add("is-depressed");
+            calculator.dataset.previousKeyType = "operator";
+        }
 
         if (action === "decimal") {
+            // Can't have more than one decimal. 
             if (!displayedNum.includes(".")) {
                 display.textContent = displayedNum + ".";
             }
-        };
+        }
 
         if (action === "clear") {
             console.log("Clear Key")
-        };
+        }
 
         if (action === "calculate") {
             console.log("Equal Key")
-        };
+        }
+        
+        // Remove .depressed from all keys
+        Array.from(key.parentNode.children).forEach(
+            (k) => k.classList.remove("is-depressed")
+        )
     }
+
 });
 
